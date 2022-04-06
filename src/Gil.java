@@ -38,7 +38,28 @@ public class Gil {
 			}
 		}
 		
-		//TODO _____________________For Tzurel__________________
+		
+		
+		//TODO ___________________For Amir___________________
+		public static boolean checkLegalMove(int r, int c, char direction) {
+			int [] otherElement = getDest(r, c, direction);
+			
+			if (otherElement[1] == -1)
+				return false;
+			//Perform swapping 
+			preformSwap(r, c, otherElement[0], otherElement[1]);
+			//Check:
+			if (!countTriosInLocation(r,c) == 0 && !countTriosInLocation(otherElement[0], otherElement[1])) {
+				return false
+			}
+			//Return to original state
+			preformSwap(r, c, otherElement[0], otherElement[1]);
+			return true;
+				
+		}
+		
+		
+		
 		public static int[] getDest(int r, int c, char direction) {
 			final int [] invalidArr = {-1,-1};
 			int [] ret = {0,0};
@@ -97,9 +118,8 @@ public class Gil {
 			return ret;
 		}
 		
+		//TODO ___________________For Amir___________________
 
-
-		//TODO _______________________Tzurel__________________
 		
 		
 		
