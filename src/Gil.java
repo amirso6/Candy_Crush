@@ -82,6 +82,7 @@ public class Gil {
 			//Secondly apply the changes
 			ret[0] = r;
 			ret[1] = c + 1;
+			break;
 
 			
 			case 'd' :
@@ -92,6 +93,8 @@ public class Gil {
 				//Secondly apply the changes
 				ret[0] = r;
 				ret[1] = c - 1;
+				break;
+
 	
 			case 'r' :
 				//First check if index is valid 
@@ -101,6 +104,8 @@ public class Gil {
 				//Secondly apply the changes
 				ret[0] = r + 1;
 				ret[1] = c;
+				break;
+
 	
 			case 'l':
 				//First check if index is valid 
@@ -110,10 +115,7 @@ public class Gil {
 				//Secondly apply the changes
 				ret[0] = r - 1;
 				ret[1] = c;
-				
-			default:
-				System.out.println("Illegal direction");
-				
+				break;
 			}
 			return ret;
 		}
