@@ -1,7 +1,12 @@
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Game
 {
 	public static int BOARD_SIZE = 10;
 	public static char[][] board = null;
+	public static final char EMPTY_CHAR = '=';
+    public static char[] sings = {'1','2','3','4'};
+		
 
 	public static void print_board()
 	{
@@ -34,6 +39,15 @@ public class Game
 				}
 			}
 		}
+	}
+	
+	public static char getRandomChar(){
+        int i = ThreadLocalRandom.current().nextInt(1,4);
+        return sings[i];
+    }
+	
+	public boolean isLegalLoc(int r, int c) {
+		return (r>0&&r<BOARD_SIZE&&c>0&&c<BOARD_SIZE) ;
 	}
 	
 	public static void main(String[] args)

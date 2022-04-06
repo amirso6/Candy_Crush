@@ -22,7 +22,7 @@ public class Amir {
 		}
 	}
 	
-	public boolean isLegalLoc(int r, int c) {
+	public static boolean isLegalLoc(int r, int c) {
 		return (r>0&&r<BOARD_SIZE&&c>0&&c<BOARD_SIZE) ;
 	}
 	
