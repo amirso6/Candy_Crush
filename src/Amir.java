@@ -21,6 +21,14 @@ public class Amir {
 			}
 		}
 	}
+	
+	public boolean isLegalLoc(int r, int c) {
+		return (r>0&&r<BOARD_SIZE&&c>0&&c<BOARD_SIZE) ;
+	}
+	
+	public int countTriosInLocation(int r, int c) {
+		return c;
+	}
 
 
 	private boolean checkTrioAddedChar(char ch, int r, int c){
