@@ -122,6 +122,72 @@ public class Game
         return counter;
     }
 	
+	public static boolean checkLegalMove(int r, int c, char direction) {
+		int [] otherElement = getDest(r, c, direction);	
+		if (otherElement[1] == -1)
+			return false;
+		//Perform swapping 
+		preformSwap(r, c, otherElement[0], otherElement[1]);
+		//Check:
+		if (countTriosInLocation(r,c) == 0 && countTriosInLocation(otherElement[0], otherElement[1] )==0) {
+			return false;
+		}
+		//Return to original state
+		preformSwap(r, c, otherElement[0], otherElement[1]);
+		return true;		
+	}
+	
+	public static int[] getDest(int r, int c, char direction) {
+		final int [] invalidArr = {-1,-1};
+		int [] ret = {0,0};
+		if (direction != 'u' && direction != 'd' && direction != 'l' && direction != 'r') {
+			System.out.println("Illegal direction");
+			return invalidArr;
+		}
+		switch (direction) {
+		case 'u':
+		//First check if index is valid 
+		if (!isLegalLoc(r, c + 1))
+			return invalidArr;
+		//Secondly apply the changes
+		ret[0] = r;
+		ret[1] = c + 1;
+		break;		
+		case 'd' :
+			//First check if index is valid 
+			if (!isLegalLoc(r, c - 1))
+				return invalidArr;
+			//Secondly apply the changes
+			ret[0] = r;
+			ret[1] = c - 1;
+			break;
+		case 'r' :
+			//First check if index is valid 
+			if (!isLegalLoc(r + 1, c))
+				return invalidArr;
+			//Secondly apply the changes
+			ret[0] = r + 1;
+			ret[1] = c;
+			break;
+		case 'l':
+			//First check if index is valid 
+			if (!isLegalLoc(r - 1, c))
+				return invalidArr;	
+			//Secondly apply the changes
+			ret[0] = r - 1;
+			ret[1] = c;
+			break;
+		}
+		return ret;
+	}
+	
+    public static void preformSwap( int r1, int c1, int r2, int c2 ){
+        char tempSwap = board[r1][c1];
+        board[r1][c1] = board[r2][c2];
+        board[r2][c2] = tempSwap;
+    }
+	
+	
 	public static void main(String[] args)
 	{
 		Scanner input = new Scanner(System.in);
@@ -135,6 +201,12 @@ public class Game
 		y=input.nextInt();
 		System.out.println("Enter direction(u,d,l,r)");
 		dir=input.next().charAt(0);
+		System.out.println(countTriosInLocation(x,y));
+		if(checkLegalMove(x,y,dir)) {
+			System.out.println("Legal move");
+		}else {
+			System.out.println("Ilegal move");
+		}
 		
 	}
 }
