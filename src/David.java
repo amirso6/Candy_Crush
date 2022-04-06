@@ -1,3 +1,4 @@
+import java.util.concurrent.ThreadLocalRandom;
 
 public class David {
     public class Game {
@@ -41,7 +42,10 @@ public class David {
             print_board();
         }
 
-        public static char getRandomChar()
+        public static char getRandomChar(){
+            int i = ThreadLocalRandom.current().nextInt(1,4);
+            return sings[i];
+        }
     }
 
 }
