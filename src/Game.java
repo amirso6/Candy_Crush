@@ -42,17 +42,57 @@ public class Game
 	}
 	
 	public static char getRandomChar(){
-        int i = ThreadLocalRandom.current().nextInt(1,4);
+        int i = ThreadLocalRandom.current().nextInt(0,4);
         return sings[i];
     }
 	
-	public boolean isLegalLoc(int r, int c) {
-		return (r>0&&r<BOARD_SIZE&&c>0&&c<BOARD_SIZE) ;
+	public static boolean isLegalLoc(int r, int c) {
+		return (r>=0&&r<BOARD_SIZE&&c>=0&&c<BOARD_SIZE) ;
+	}
+	
+	public static boolean checkTrioAddedChar(char ch, int r, int c) {
+        int counter = 0;
+        //check for rows:
+        for(int i = 1; i <= 2; i++) {
+            if(isLegalLoc(r, c - i) && board[r][c - i] == ch) {
+                counter += 1;
+            }
+        }
+        //return false if the new char equal to 2 char in cols before:
+        if(counter == 2)
+            return false;
+        counter = 0;
+        for(int z = 1; z <= 2; z++) {
+            if(isLegalLoc(r - z, c) && board[r - z][c] == ch) {
+                counter += 1;
+            }
+        }
+        if(counter == 2) {
+            return false;
+        }
+        return true;
+    }
+	
+	public static void generateRandomBoard() {
+		int CurrectBoardState=1;
+		for(int i=0;i<board.length;i++) {
+			for(int j=0;j<board[i].length;j++) {
+				do {
+					board[i][j]=getRandomChar( );
+					if(checkTrioAddedChar(board[i][j],i ,j)) {
+						CurrectBoardState=1;
+					}else {
+						CurrectBoardState=0;
+					}
+				}while(CurrectBoardState==0);
+			}
+		}
 	}
 	
 	public static void main(String[] args)
 	{
 		update_board0();
+		generateRandomBoard();
 		print_board();
 	}
 }
