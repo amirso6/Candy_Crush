@@ -49,8 +49,8 @@ public class Gil {
 			//Perform swapping 
 			preformSwap(r, c, otherElement[0], otherElement[1]);
 			//Check:
-			if (!countTriosInLocation(r,c) == 0 && !countTriosInLocation(otherElement[0], otherElement[1])) {
-				return false
+			if (countTriosInLocation(r,c) == 0 && countTriosInLocation(otherElement[0], otherElement[1] == 0)) {
+				return false;
 			}
 			//Return to original state
 			preformSwap(r, c, otherElement[0], otherElement[1]);
