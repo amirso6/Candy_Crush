@@ -24,7 +24,24 @@ public class Amir {
 	}
 	
 	public int countTriosInLocation(int r, int c) {
-		return c;
+		return 0;
+	}
+	
+	public static void makeMove(int r,int c,char direction) {
+		int[] point2=getDest(r,c,direction);
+		preformSwap(r,c,point2[0],point2[1]);
+	}
+	
+	private static void preformSwap(int r, int c, int i, int j) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static int[] getDest(int r,int c,char direction){
+		int [] x=new int[2];
+		x[0]=0;
+		x[1]=0;
+		return x;
 	}
 
 
