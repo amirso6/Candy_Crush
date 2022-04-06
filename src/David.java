@@ -46,6 +46,12 @@ public class David {
             int i = ThreadLocalRandom.current().nextInt(1,4);
             return sings[i];
         }
+
+        public static void preformSwap( int r1, int c1, int r2, int c2 ){
+            char tempSwap = board[r1][c1];
+            board[r1][c1] = board[r2][c2];
+            board[r2][c2] = tempSwap;
+        }
     }
 
 }

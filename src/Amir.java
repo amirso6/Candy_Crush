@@ -5,24 +5,21 @@ public class Amir {
 
 	
 	public void generateRandomBoard() {
-		boolean CurrectBoardState=true;
 		for(int i=0;i<board.length;i++) {
 			for(int j=0;j<board[i].length;j++) {
 				do {
 					board[i][j]=getRandomChar( );
 					if(i>3 && j>3) {
 						if(checkTrioAddedChar(board[i][j],i ,j)) {
-							CurrectBoardState=true;
 						}else {
-							CurrectBoardState=false;
 						}
 					}
-				}while(CurrectBoardState=false);
+				}while(false);
 			}
 		}
 	}
 	
-	public boolean isLegalLoc(int r, int c) {
+	public static boolean isLegalLoc(int r, int c) {
 		return (r>0&&r<BOARD_SIZE&&c>0&&c<BOARD_SIZE) ;
 	}
 	
