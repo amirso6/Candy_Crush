@@ -1,3 +1,4 @@
+import java.time.Period;
 
 public class Gil {
 
@@ -37,66 +38,70 @@ public class Gil {
 			}
 		}
 		
-		
-		public boolean checkLegalMove (int r, int c, char direction) {
-			final int DISQ_VALUE = 0; //This value reflects the  creation of at least one trio
-
-
-			boolean validity;
-			boolean createTrio = countTriosInLocation(r, c) > DISQ_VALUE;
-			// If the indexes are out of bound or there are no trios
-			switch (direction) {
+		//TODO _____________________For Tzurel__________________
+		public static int[] getDest(int r, int c, char direction) {
+			final int [] invalidArr = {-1,-1};
+			int [] ret = {0,0};
+			
+			
+			if (direction != 'u' && direction != 'd' && direction != 'l' && direction != 'r') {
+				System.out.println("Illegal direction");
+				return invalidArr;
+			}
 				
 			
-			case 'u':
-				//First check if move is valid
-				validity = isLegalLoc(r, c + 1);
-				//Second check if a trio was created
-				createTrio = createTrio || countTriosInLocation(r,c + 1) > DISQ_VALUE;
-				break;
 			
+			switch (direction) {
+			
+			case 'u':
+			//First check if index is valid 
+			if (!isLegalLoc(r, c + 1))
+				return invalidArr;
+			
+			//Secondly apply the changes
+			ret[0] = r;
+			ret[1] = c + 1;
+
 			
 			case 'd' :
-				//First check if move is valid
-				validity = isLegalLoc(r, c + 1);
-				//Second check if a trio was created
-				createTrio = createTrio || countTriosInLocation(r,c - 1) > DISQ_VALUE;
-				break;
+				//First check if index is valid 
+				if (!isLegalLoc(r, c - 1))
+					return invalidArr;
+				
+				//Secondly apply the changes
+				ret[0] = r;
+				ret[1] = c - 1;
 	
 			case 'r' :
-				//First check if move is valid
-				validity = isLegalLoc(r, c + 1);
-				//Second check if a trio was created
-				createTrio = createTrio || countTriosInLocation(r + 1,c) > DISQ_VALUE;
-				break;
+				//First check if index is valid 
+				if (!isLegalLoc(r + 1, c))
+					return invalidArr;
+				
+				//Secondly apply the changes
+				ret[0] = r + 1;
+				ret[1] = c;
 	
 			case 'l':
-				//First check if move is valid
-				validity = isLegalLoc(r, c + 1);
-				//Second check if a trio was created
-				createTrio = createTrio || countTriosInLocation(r - 1,c) > DISQ_VALUE;
-				break;
-			
+				//First check if index is valid 
+				if (!isLegalLoc(r - 1, c))
+					return invalidArr;
+				
+				//Secondly apply the changes
+				ret[0] = r - 1;
+				ret[1] = c;
+				
 			default:
-				validity = false;
-				System.out.println("Invalid direction");
-				break;
+				System.out.println("Illegal direction");
+				
 			}
-			
-			
-			if (!validity) {
-				System.out.println("The move is out of bound");
-				return false;
-			}
-			
-			if (!createTrio ) {
-				System.out.println("No trio was created, try again");
-			}
-			
-			
-			//If both conditions fulfilled the move is valid
-			return true;
+			return ret;
 		}
+		
+
+
+		//TODO _______________________Tzurel__________________
+		
+		
 		
 		
 		private int countTriosInLocation(int r, int c) {
@@ -104,9 +109,16 @@ public class Gil {
 			return 0;
 		}
 
-		public boolean isLegalLoc(int r, int c) {
+		public static boolean isLegalLoc(int r, int c) {
 			return (r>0&&r<BOARD_SIZE&&c>0&&c<BOARD_SIZE) ;
 		}
+		
+		
+        public static void preformSwap( int r1, int c1, int r2, int c2 ){
+            char tempSwap = board[r1][c1];
+            board[r1][c1] = board[r2][c2];
+            board[r2][c2] = tempSwap;
+        }
 		
 		
 
