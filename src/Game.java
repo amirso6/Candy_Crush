@@ -2,7 +2,6 @@ public class Game
 {
 	public static int BOARD_SIZE = 10;
 	public static char[][] board = null;
-	// david
 	public static void print_board()
 	{
 		if (board == null)
